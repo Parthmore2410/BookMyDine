@@ -1,5 +1,5 @@
 # BookMyDine
-Introduction
+Introduction:
 It is a restaurant table reservation system website called BookMyDine. Users can sign up and log in to access the home page, which offers various options such as listed restaurants, profile, home, and contact.
 
 When a user selects a specific restaurant, they are redirected to the hotel's layout, where they can choose their desired table, similar to booking seats on the BookMyShow app.
