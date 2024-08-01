@@ -1,0 +1,30 @@
+/* Ensure the body and html take up the full height of the viewport */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Container for centering the layout */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* Style for the table layout to be smaller than the screen dimensions */
+.table-layout {
+  width: 80vw;  /* 80% of the viewport width */
+  height: 60vh; /* 60% of the viewport height */
+  border: 1px solid #000; /* Optional: Add a border for visibility */
+  overflow: auto; /* Allow scrolling if content exceeds size */
+}
+
+/* Optional: Additional styling to make the table layout visually distinct */
+.table-layout {
+  background-color: #f0f0f0; /* Light grey background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+  border-radius: 8px; /* Rounded corners */
+}

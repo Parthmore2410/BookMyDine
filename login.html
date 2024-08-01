@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Signup</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+    <div class="box">
+        <div class="elements untoldcoding"></div>
+        <div class="elements name">
+            <h2 id="formTitle">Login</h2>
+        </div>
+        <div class="elements content">
+            <form id="loginForm" style="display: block;">
+                <input type="text" id="loginEmail" placeholder="Email" required />
+                <input type="password" id="loginPassword" placeholder="Password" required />
+                <button type="submit">Login</button>
+                <p>Don't have an account? <a href="#" id="showSignupForm">Sign up</a></p>
+            </form>
+            <form id="signupForm" style="display: none;">
+                <input type="text" id="signupName" placeholder="Name" required />
+                <input type="email" id="signupEmail" placeholder="Email" required />
+                <input type="text" id="signupAddress" placeholder="Address" required />
+                <input type="tel" id="signupNumber" placeholder="Number" required />
+                <input type="password" id="signupPassword" placeholder="Password" required />
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="#" id="showLoginForm">Login</a></p>
+            </form>
+        </div>
+        <div class="card"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        VanillaTilt.init(document.querySelector(".box"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+        });
+
+        document.getElementById('showSignupForm').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('formTitle').innerText = 'Sign Up';
+        });
+
+        document.getElementById('showLoginForm').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('formTitle').innerText = 'Login';
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const address = document.getElementById('signupAddress').value;
+            const number = document.getElementById('signupNumber').value;
+            const password = document.getElementById('signupPassword').value;
+
+            localStorage.setItem('user', JSON.stringify({ name, email, address, number, password }));
+            alert('Signup successful! Please log in.');
+            document.getElementById('showLoginForm').click();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (user && user.email === email && user.password === password) {
+                window.location.href = 'homepage.html';
+            } else {
+                alert('Invalid email or password');
+            }
+        });
+    </script>
+</body>
+</html>

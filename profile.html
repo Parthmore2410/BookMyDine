@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Profile</h1>
+        <p><strong>Name:</strong> <input type="text" id="profileName" disabled></p>
+        <p><strong>Email:</strong> <input type="email" id="profileEmail" disabled></p>
+        <p><strong>Address:</strong> <input type="text" id="profileAddress" disabled></p>
+        <p><strong>Number:</strong> <input type="text" id="profileNumber" disabled></p>
+        <button id="editButton">Edit</button>
+        <button id="saveButton" disabled>Save</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                document.getElementById('profileName').value = user.name;
+                document.getElementById('profileEmail').value = user.email;
+                document.getElementById('profileAddress').value = user.address;
+                document.getElementById('profileNumber').value = user.number;
+            } else {
+                alert('No user information found. Please sign up or log in.');
+                window.location.href = 'index.html';
+            }
+
+            const editButton = document.getElementById('editButton');
+            const saveButton = document.getElementById('saveButton');
+            const inputs = document.querySelectorAll('input');
+
+            editButton.addEventListener('click', function () {
+                inputs.forEach(input => input.disabled = false);
+                saveButton.disabled = false;
+                editButton.disabled = true;
+            });
+
+            saveButton.addEventListener('click', function () {
+                const updatedUser = {
+                    name: document.getElementById('profileName').value,
+                    email: document.getElementById('profileEmail').value,
+                    address: document.getElementById('profileAddress').value,
+                    number: document.getElementById('profileNumber').value
+                };
+
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+
+                inputs.forEach(input => input.disabled = true);
+                saveButton.disabled = true;
+                editButton.disabled = false;
+
+                alert('Profile updated successfully!');
+            });
+        });
+    </script>
+</body>
+</html>
